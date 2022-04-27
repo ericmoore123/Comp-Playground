@@ -55,3 +55,20 @@ Promise.all([fetchPromise1, fetchPromise2]) //Fetch all requests and return each
 
 
 // ========== Async Await ==========
+// The async keyword gives you a simpler way to work with asynchronous promise-based code. Adding async 
+// at the start of a function makes it an async function. Async and await keywords tend to pair well with other keywords
+// try and catch exceptions.
+const productsFetch = fetch('https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json');
+
+async function fetchProducts(){
+    try{
+        const res = await productsFetch;
+        const json = await res.json();
+        return json;
+    }catch(err){
+        console.error('Could not get products: ', err);
+    };
+};
+
+const jsonPromise = fetchProducts();
+jsonPromise.then( jsonItem => console.log('jsonItem: ', jsonItem[0].name))
