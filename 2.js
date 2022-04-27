@@ -21,7 +21,6 @@
 
 import fetch from 'node-fetch';
 const fetchPromise = fetch('https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json');
-
 // Step 1
 console.log(fetchPromise); // This shows incomplete promise return object "Promise { <pending> }" in logs FIRST 
 
@@ -33,3 +32,9 @@ fetchPromise.then( res => {
 // Step 2
 console.log("Started request..."); // This shows fetch is being initiated in logs SECOND
 
+
+// Chaining Promises
+// MOST Minimal code approach
+fetchPromise // Make intiial async request from fetch call
+    .then(res => res.json()) // convert response to json using .json() (promise is returned)
+    .then(json => console.log(json[0].name)); // take retured json object and log first items name
